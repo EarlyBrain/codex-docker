@@ -1,0 +1,5 @@
+# Codex
+.codex/*
+!.codex/skills/
+.codex/skills/.system/
+AGENTS.override.md

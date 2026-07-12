@@ -2,7 +2,7 @@
 # - 構築
 # docker build . -t earlybrain/codex:latest
 # - 実行
-# docker run -it --rm -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
+# docker run -it --rm --security-opt seccomp=unconfined -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
 # - 削除
 # docker rmi earlybrain/codex:latest
 

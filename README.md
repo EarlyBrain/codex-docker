@@ -28,6 +28,7 @@ docker build . -t earlybrain/codex:latest
 
 ```sh
 docker run -it --rm \
+  --security-opt seccomp=unconfined \
   -v "$(pwd):/var/code" \
   -v "$(pwd)/.codex:/home/appuser/.codex" \
   earlybrain/codex:latest

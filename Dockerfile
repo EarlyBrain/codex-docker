@@ -5,6 +5,7 @@
 # docker run -it --rm --security-opt seccomp=unconfined -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
 # - 削除
 # docker rmi earlybrain/codex:latest
+# docker builder prune
 
 # FROMはベースとなるコンテナのOSイメージを指定
 FROM node:26.5.0-slim
@@ -28,6 +29,10 @@ RUN npm install -g @openai/codex && \
 
 # Pythonのインストール
 RUN apt install -y python3 python3-pip python3-venv
+
+# その他ツールのインストール
+RUN python3 -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir pillow
 
 # マウントボリューム
 RUN mkdir /var/code

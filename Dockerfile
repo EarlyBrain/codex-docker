@@ -1,11 +1,11 @@
 # Docker版 Codex CLI実行環境
 # - 構築
-# docker build . -t earlybrain/codex:latest
+# docker build --no-cache --progress=plain . -t earlybrain/codex:latest
 # - 実行
 # docker run -it --rm --security-opt seccomp=unconfined -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
 # - 削除
 # docker rmi earlybrain/codex:latest
-# docker builder prune
+# docker builder prune --force
 
 # FROMはベースとなるコンテナのOSイメージを指定
 FROM node:26.5.0-slim
@@ -16,7 +16,7 @@ LABEL description="Codex CLI実行環境"
 RUN apt update && \
     apt install -y sudo curl git
 
-# # グループとユーザーアカウントの作成
+# グループとユーザーアカウントの作成
 RUN groupadd -g 1100 appgroup && \
     useradd -u 1100 -g 1100 -m -s /bin/bash appuser
 

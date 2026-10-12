@@ -2,7 +2,7 @@
 # - 構築
 # docker build --no-cache --progress=plain . -t earlybrain/codex:latest
 # - 実行
-# docker run -it --rm --security-opt seccomp=unconfined -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
+# docker run -it --rm --privileged -v .:/var/code -v .codex:/home/appuser/.codex earlybrain/codex:latest
 # - 削除
 # docker rmi earlybrain/codex:latest
 # docker builder prune --force
@@ -29,10 +29,13 @@ RUN npm install -g @openai/codex && \
 
 # Pythonのインストール
 RUN apt install -y python3 python3-pip python3-venv
+RUN python3 -m venv /opt/venv
 
-# その他ツールのインストール
-RUN python3 -m venv /opt/venv && \
-    /opt/venv/bin/pip install --no-cache-dir pillow
+# Python画像ライブラリのインストール
+RUN /opt/venv/bin/pip install --no-cache-dir pillow
+
+# OCRのインストール
+RUN apt-get install -y tesseract-ocr tesseract-ocr-eng tesseract-ocr-jpn poppler-utils
 
 # マウントボリューム
 RUN mkdir /var/code

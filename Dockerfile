@@ -27,6 +27,9 @@ RUN echo "appuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN npm install -g @openai/codex && \
     apt install -y bubblewrap
 
+# ImageMagickのインストール
+RUN apt-get install -y imagemagick
+
 # Pythonのインストール
 RUN apt install -y python3 python3-pip python3-venv
 RUN python3 -m venv /opt/venv
